@@ -7,12 +7,14 @@ const catwaySchema = new Schema({
         required: [true, 'Le numéro de catway est requis'],
         unique: true
     },
+
     type: {
         type: String, 
         required: [true, 'Le type est requis'],
         enum: ['short', 'long'],
         trim: true
     },
+    
     catwayState: {
         type: String, 
         required: [true, "L'état du catway est requis"],

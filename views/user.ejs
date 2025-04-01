@@ -1,0 +1,18 @@
+<h1 class="text-center mb-5">Détails de l'utilisateur <%= user.name %></h1>
+
+<div class="container">
+    <div class="card p-5 m-5">
+        <p><strong>Nom :</strong> <%= user.name %></p>
+        <p><strong>Email :</strong> <%= user.email %></p>
+        <p><strong>ID :</strong> <%= user._id %></p>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="/users" class="btn btn-secondary">Retour</a>
+            <div>
+                <form action="/users/<%= user._id %>?_method=DELETE" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

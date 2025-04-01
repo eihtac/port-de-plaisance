@@ -1,0 +1,19 @@
+<h1 class="text-center mb-5">Détails de la réservation</h1>
+
+<div class="container">
+    <div class="card p-5 m-5">
+        <p><strong>Client :</strong> <%= reservation.clientName %></p>
+        <p><strong>Bateau :</strong> <%= reservation.boatName %></p>
+        <p><strong>Catway n° :</strong> <%= reservation.catwayNumber %></p>
+        <p><strong>Date d'arrivée :</strong> <%= reservation.checkIn.toLocaleDateString('fr-FR') %></p>
+        <p><strong>Date de départ :</strong> <%= reservation.checkOut.toLocaleDateString('fr-FR') %></p>
+        <p><strong>ID :</strong> <%= reservation._id %></p>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="/reservations" class="btn btn-secondary">Retour</a>
+            <form action="/catways/:id/reservations/<%= reservation._id %>?_method=DELETE" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger">Supprimer</button>
+            </form>
+        </div>
+    </div>
+</div>

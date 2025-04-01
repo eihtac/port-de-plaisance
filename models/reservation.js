@@ -6,20 +6,24 @@ const reservationSchema = new Schema({
         type: Number,
         required: [true, 'Le numéro du catway est requis']
     },
+
     clientName: {
         type: String,
         required: [true, 'Le nom du client est requis'],
         trim: true
     },
+
     boatName: {
         type: String,
         required: [true, 'Le nom du bateau est requis'],
         trim: true
     },
+
     checkIn: {
         type: Date, 
         required: [true, "La date d'arrivée est requise"]
     },
+    
     checkOut: {
         type: Date,
         required: [true, "La date de départ est requise"]

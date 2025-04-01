@@ -1,0 +1,28 @@
+<h1 class="text-center mb-5">Réservations</h1>
+
+<% if (created) { %>
+    <p class="alert alert-success">La réservation a bien été ajoutée !</p>
+<% } else if (deleted) { %>
+    <p class="alert alert-success">La réservation a bien été supprimée !</p>
+<% } %>
+
+<div class="container mb-5">
+    <div class="row">
+        <% if (reservations.length === 0) { %>
+            <p>Aucune réservation pour le moment.</p>
+        <% } else { %>
+            <ul class="list-group">
+                <% reservations.forEach(reservation => { %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong><%= reservation.clientName %></strong> (bateau : <%= reservation.boatName %>)<br>
+                            <small>Du <%= reservation.checkIn.toLocaleDateString('fr-FR') %> au <%= reservation.checkOut.toLocaleDateString('fr-FR') %></small><br>
+                            <small>Catway n°<%= reservation.catwayNumber %></small>
+                        </div>
+                        <a href="/catways/<%= reservation.catwayNumber %>/reservations/<%= reservation._id %>" class="btn btn-dark btn-sm">Voir</a>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </div>
+</div>

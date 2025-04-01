@@ -1,0 +1,30 @@
+<h1 class="text-center mb-5">Utilisateurs</h1>
+
+<% if (created) { %>
+    <p class="alert alert-success">L'utilisateur a bien été ajouté !</p>
+<% } else if (updated) { %>
+    <p class="alert alert-success">L'utilisateur a bien été modifié !</p>
+<% } else if (deleted) { %>
+    <p class="alert alert-success">L'utilisateur a bien été supprimé !</p>
+<% } %>
+
+
+<div class="container mb-5">
+    <div class="row">
+        <% if (users.length === 0) { %>
+            <p>Aucun utilisateur pour le moment.</p>
+        <% } else { %>
+            <ul class="list-group">
+                <% users.forEach(user => { %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong><%= user.name %></strong><br>
+                            <small><%= user.email %></small>
+                        </div>
+                        <a href="/users/<%= user._id %>" class="btn btn-dark btn-sm">Voir</a>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </div>
+</div>
