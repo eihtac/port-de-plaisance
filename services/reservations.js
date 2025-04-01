@@ -4,7 +4,7 @@ const Reservation = require('../models/reservation');
 exports.getAllReservations = async (req, res) => {
     try {
         const reservations = await Reservation.find();
-        res.status(200).json(reservations);
+        return reservations;
     } catch (error) {
         res.status(500).json({message: 'Erreur', error: error.message });
     }
@@ -22,7 +22,7 @@ exports.getReservationsByCatway = async (req, res) => {
             catwayNumber: catway.catwayNumber
         });
 
-        res.status(200).json(reservations);
+        return reservations;
     } catch (error) {
         res.status(500).json({ message: 'Erreur', error: error.message });
     }
@@ -36,7 +36,7 @@ exports.getReservationById = async (req, res) => {
             return res.status(404).json({ message: 'Réservation non trouvée' });
         }
 
-        res.status(200).json(reservation);
+        return reservation;
     } catch (error) {
         res.status(500).json({ message: 'Erreur', error: error.message });
     }
@@ -44,19 +44,18 @@ exports.getReservationById = async (req, res) => {
 
 exports.addReservation = async (req, res) => {
     try {
-        const catway = await Catway.findById(req.params.id);
+        const { catwayNumber, clientName, boatName, checkIn, checkOut } = req.body;
 
+        if (!catwayNumber || !clientName || !boatName || !checkIn || !checkOut ) {
+            return res.status(400).json({ message: 'Tous les champs sont requis' });
+        }
+
+        const catway = await Catway.findOne({ catwayNumber });
         if (!catway) {
             return res.status(404).json({ message: 'Catway non trouvé' });
         }
 
-        const { clientName, boatName, checkIn, checkOut } = req.body;
-
-        if (!clientName || !boatName || !checkIn || !checkOut ) {
-            return res.status(400).json({ message: 'Tous les champs sont requis' });
-        }
-
-        const newReservation = await Reservation.create({
+        await Reservation.create({
             catwayNumber: catway.catwayNumber,
             clientName,
             boatName, 
@@ -64,10 +63,7 @@ exports.addReservation = async (req, res) => {
             checkOut
         });
 
-        res.status(201).json({
-            message: 'Réservation créée !',
-            reservation: newReservation
-        });
+        res.redirect('/reservations?created=1');
     } catch (error) {
         res.status(500).json({ message: 'Erreur', error: error.message });
     }
@@ -81,10 +77,7 @@ exports.deleteReservation = async (req, res) => {
             return res.status(404).json({ message: 'Réservation non trouvée' });
         }
 
-        res.status(200).json({
-            message: 'Réservation supprimée !',
-            reservation : reservation
-        });
+        res.redirect('/reservations?deleted=1');
     } catch (error) {
         res.status(500).json({ message: 'Erreur', error: error.message });
     }

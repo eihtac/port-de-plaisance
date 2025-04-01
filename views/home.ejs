@@ -1,0 +1,27 @@
+<h1 class="mb-4 mt-5 pt-5">Port de plaisance Russell</h1>
+
+<p>Bienvenue au port de plaisance Russell ! Connectez-vous pour voir les catways et les réservations.</p>
+
+<% if (success) { %>
+    <p class="alert alert-success">Inscription réussie ! Vous pouvez maintenant vous connecter.</p>
+<% } else if (logout) { %>
+    <p class="alert alert-success">Vous avez été déconnecté.</p>
+<% } %>
+
+<form action="/login" method="POST" class="d-flex flex-column align-items-center">
+    <div>
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" id="email" required>
+    </div>
+
+    <div>
+        <label for="password" class="form-label">Mot de passe</label>
+        <input type="password" class="form-control" name="password" id="password" required>
+    </div>
+
+    <button type="submit" class="btn btn-dark my-3">Se connecter</button>
+</form>
+
+<p>Pas de compte ? Inscrivez-vous <a href="/register" class="text-black">en cliquant ici</a>.</p>
+
+<a href="/documentation" class="text-black">Voir la documentation de l'API</a>

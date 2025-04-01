@@ -1,0 +1,19 @@
+<h1 class="text-center mb-5">Détails du catway n°<%= catway.catwayNumber %></h1>
+
+<div class="container">
+    <div class="card p-5 m-5">
+        <p><strong>Numéro :</strong> <%= catway.catwayNumber %></p>
+        <p><strong>Type :</strong> <%= catway.type %></p>
+        <p><strong>État :</strong> <%= catway.catwayState %></p>
+        <p><strong>ID :</strong> <%= catway._id %></p>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="/catways" class="btn btn-secondary">Retour</a>
+            <div>
+                <form action="/catways/<%= catway._id %>?_method=DELETE" method="POST" class="d-inline">
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<h1 class="text-center mb-5">Tableau de bord</h1>
+
+<div class="card p-4 mb-5">
+    <section class="mb-5 row align-items-center">
+        <h2 class="text-center mb-4">Utilisateurs</h2>
+    
+        <form action="/register" method="POST" class="col-4">
+            <h3>Créer un utilisateur</h3>
+            <input type="hidden" name="fromDashboard" value="true">
+            <input name="name" type="text" placeholder="Nom" class="form-control mb-2" required>
+            <input name="email" type="email" placeholder="Email" class="form-control mb-2" required>
+            <input name="password" type="password" placeholder="Mot de passe" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto px-4">Créer</button>
+        </form>
+    
+        <form action="/users/:id?_method=PUT" method="POST" class="col-4">
+            <h3>Modifier un utilisateur</h3>
+            <input name="id" type="text" placeholder="ID utilisateur" class="form-control mb-2" required>
+            <input name="name" type="text" placeholder="Nom" class="form-control mb-2" required>
+            <input name="email" type="email" placeholder="Email" class="form-control mb-2" required>
+            <input name="password" type="password" placeholder="Mot de passe" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto px-3">Modifier</button>
+        </form>
+    
+        <form action="/users/:id?_method=DELETE" method="POST" class="col-4">
+            <h3>Supprimer un utilisateur</h3>
+            <input name="id" type="text" placeholder="ID utilisateur" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto">Supprimer</button>
+        </form>
+    
+        <div class="text-center">
+            <a href="/users" class="btn btn-secondary mt-2">Voir tous les utilisateurs</a>
+        </div>
+    </section>
+</div>
+
+<div class="card p-4 mb-5">
+    <section class="mb-5 row align-items-center">
+        <h2 class="text-center mb-4">Catways</h2>
+    
+        <form action="/catways" method="POST" class="col-3">
+            <h3>Créer un catway</h3>
+            <input name="catwayNumber" type="text" placeholder="Numéro" class="form-control mb-2" required>
+            <input name="type" type="text" placeholder="Type (short/long)" class="form-control mb-2" required>
+            <input name="catwayState" type="text" placeholder="État" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto px-4">Créer</button>
+        </form>
+    
+        <form action="/catways/:id?_method=PATCH" method="POST" class="col-3">
+            <h3>Modifier l'état d'un catway</h3>
+            <input name="id" type="text" placeholder="ID catway" class="form-control mb-2" required>
+            <input name="catwayState" type="text" placeholder="État" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto px-3">Modifier</button>
+        </form>
+    
+        <form action="/catways/:id?_method=DELETE" method="POST" class="col-3">
+            <h3>Supprimer un catway</h3>
+            <input name="id" type="text" placeholder="ID catway" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto">Supprimer</button>
+        </form>
+    
+        <form action="/catways/:id" method="GET" class="col-3">
+            <h3>Afficher un catway</h3>
+            <input name="id" type="text" placeholder="ID catway" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto px-4">Voir</button>
+        </form>
+    
+        <div class="text-center">
+            <a href="/catways" class="btn btn-secondary mt-2">Voir tous les catways</a>
+        </div>
+    </section>
+</div>
+
+<div class="card p-4 mb-5">
+    <section class="mb-5 row align-items-center">
+        <h2 class="text-center mb-4">Réservations</h2>
+    
+        <form action="/catways/:id/reservations" method="POST" class="col-4">
+            <h3>Créer une réservation</h3>
+            <input name="catwayNumber" type="number" placeholder="Numéro du catway" class="form-control mb-2" required>
+            <input name="clientName" type="text" placeholder="Nom du client" class="form-control mb-2" required>
+            <input name="boatName" type="text" placeholder="Nom du bateau" class="form-control mb-2" required>
+            <label for="checkIn" class="form-label">Date d'arrivée</label>
+            <input id="checkIn" name="checkIn" type="date" class="form-control mb-2" required>
+            <label for="checkOut" class="form-label">Date de départ</label>
+            <input id="checkOut" name="checkOut" type="date" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto px-3">Réserver</button>
+        </form>
+    
+        <form action="/catways/:id/reservations/:idReservation?_method=DELETE" method="POST" class="col-4">
+            <h3>Supprimer une réservation</h3>
+            <input name="idReservation" type="text" placeholder="ID réservation" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto">Supprimer</button>
+        </form>
+    
+        <form action="/catways/:id/reservations/:idReservation" method="GET" class="col-4">
+            <h3>Voir une réservation</h3>
+            <input name="idReservation" type="text" placeholder="ID réservation" class="form-control mb-2" required>
+            <button class="btn btn-dark d-block mx-auto px-4">Voir</button>
+        </form>
+    
+        <div class="text-center">
+            <a href="/reservations" class="btn btn-secondary mt-2">Voir toutes les réservations</a>
+        </div>
+    </section>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        document.querySelectorAll("form").forEach(form => {
+            form.addEventListener("submit", (e) => {
+                const idInput = form.querySelector('input[name="id"]');
+                if (idInput && form.action.includes(":id")) {
+                    const id = idInput.value.trim();
+                    if (id) {
+                        form.action = form.action.replace(":id", id);
+                    }
+                }
+
+                const idReservationInput = form.querySelector('input[name="idReservation"]');
+                if (idReservationInput && form.action.includes(":idReservation")) {
+                    const idRes = idReservationInput.value.trim();
+                    if (idRes) {
+                        form.action = form.action.replace(":idReservation", idRes);
+                    }
+                }
+            });
+        });
+    });
+</script>

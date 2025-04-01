@@ -1,0 +1,29 @@
+<h1 class="text-center mb-5">Catways</h1>
+
+<% if (created) { %>
+    <p class="alert alert-success">Le catway a bien été ajouté !</p>
+<% } else if (updated) { %>
+    <p class="alert alert-success">Le catway a bien été modifié !</p>
+<% } else if (deleted) { %>
+    <p class="alert alert-success">Le catway a bien été supprimé !</p>
+<% } %>
+
+<div class="container mb-5">
+    <div class="row">
+        <% if (catways.length === 0) { %>
+            <p>Aucun catway pour le moment.</p>
+        <% } else { %>
+            <ul class="list-group">
+                <% catways.forEach(catway => { %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>Catway n°<%= catway.catwayNumber %></strong><br>
+                            <small>Type : <%= catway.type %> | État : <%= catway.catwayState %></small>
+                        </div>
+                        <a href="/catways/<%= catway._id %>" class="btn btn-dark btn-sm">Voir</a>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </div>
+</div>
