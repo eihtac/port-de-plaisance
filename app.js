@@ -8,6 +8,9 @@ const session = require('express-session');
 const methodOverride = require('method-override');
 const MongoStore = require('connect-mongo');
 const PORT = process.env.PORT || 8080;
+const helmet = require('helmet');
+
+app.use(helmet());
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));

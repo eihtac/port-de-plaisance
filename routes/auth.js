@@ -38,6 +38,12 @@ router.get('/logout', (req, res) => {
     });
 });
 
+router.get('/documentation', (req, res) => {
+    res.render('documentation', {
+        title: 'Documenation', 
+        showHeader: false
+    });
+});
 
 router.post('/register', addUser);
 router.post('/login', loginUser);
