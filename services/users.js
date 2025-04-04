@@ -49,6 +49,10 @@ exports.loginUser = async (req, res) => {
 
     req.session.token = token;
 
+    if (req.headers['x-test']) {
+        return res.json({ token });
+    }
+
     res.redirect('/dashboard')
 };
 
