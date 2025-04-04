@@ -1,0 +1,63 @@
+<h1 class="text-center mb-5">Documentation de l'API - Port de plaisance Russell</h1>
+
+<div class="container">
+
+    <section class="mb-5">
+        <h2>Authentification</h2>
+        <p>La plupart des routes nécessitent que l'utilisateur soit connecté. L'authentification se fait via un formulaire de connexion (route /) et un token est utilisé pour sécuriser l'accès aux routes protégées.</p>
+    </section>
+
+    <section class="mb-5">
+        <h2>Utilisateurs</h2>
+        <ul>
+            <li><strong>GET /users</strong> : affiche tous les utilisateurs (authentification requise)</li>
+            <li><strong>GET /users/:id</strong> : affiche les détails d'un utilisateur (authentification requise)</li>
+            <li><strong>POST /register</strong> : crée un nouvel utilisateur (pas d'authentification requise)</li>
+            <li><strong>PUT /users/:id</strong> : modifie un utilisateur (authentification requise)</li>
+            <li><strong>DELETE /users/:id</strong> : supprime un utilisateur (authentification requise)</li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2>Catways</h2>
+        <ul>
+            <li><strong>GET /catways</strong> : liste tous les catways (authentification requise)</li>
+            <li><strong>GET /catways/:id</strong> : affiche les détails d'un catway (authentification requise)</li>
+            <li><strong>POST /catways</strong> : ajoute un nouveau catway (authentification requise)</li>
+            <li><strong>PATCH /catways/:id</strong> : modifie un champ du catway (authentification requise)</li>
+            <li><strong>DELETE /catways/:id</strong> : supprime un catway (authentification requise)</li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2>Réservations</h2>
+        <ul>
+            <li><strong>GET /reservations</strong> : affiche toutes les réservations (authentification requise)</li>
+            <li><strong>GET /catways/:id/reservations/:idReservation</strong> : détails d'une réservation (authentification requise)</li>
+            <li><strong>POST /catways/:id/reservations</strong> : ajoute une réservation (authentification requise)</li>
+            <li><strong>DELETE /catways/:id/reservations/:idReservation</strong> : supprime une réservation (authentification requise)</li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2>Codes de réponse HTTP</h2>
+        <ul>
+            <li><strong>200 OK</strong> : requête réussie</li>
+            <li><strong>302 Found</strong> : redirection après une action (création, suppression, etc.)</li>
+            <li><strong>400 Bad Request</strong> : données manquantes ou invalides</li>
+            <li><strong>401 Unauthorized</strong> : utilisateur non connecté</li>
+            <li><strong>404 Not Found</strong> : ressource introuvable</li>
+            <li><strong>500 Internal Server Error</strong> : erreur côté serveur</li>
+        </ul>
+    </section>
+
+    <section class="mb-5">
+        <h2>Tests automatisés</h2>
+        <p>Des tests sont en place pour vérifier le bon fonctionnement de l'API :</p>
+        <ul>
+            <li>Création, lecture et suppression d'un utilisateur</li>
+            <li>Création, lecture, modification et suppression d'un catway</li>
+            <li>Création, lecture et suppression d'une réservation</li>
+        </ul>
+    </section>
+</div>
